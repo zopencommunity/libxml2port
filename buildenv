@@ -1,16 +1,36 @@
-export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"\nexport ZOPEN_TARBALL_DEPS="libz libiconv"\nexport ZOPEN_TYPE="TARBALL"\n\nzopen_check_results()
+export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
+export ZOPEN_TARBALL_DEPS="libiconv"
+export ZOPEN_TYPE="TARBALL"
+
+zopen_check_results()
 {
+# Look for line starting with Total. Should be no more than 2 errors
+# Total 2737 tests, 2 errors, 0 leaks
+grep '^Total' log/20230123_005029_check.log
+Total 2737 tests, 2 errors, 0 leaks
   dir="$1"
   pfx="$2"
   chk="$1/$2_check.log"
 
-  # Echo the following information to gauge build health
-  echo "actualFailures:0"
-  echo "totalTests:1"
-  echo "expectedFailures:0"
+  info=$(grep '^Total' "${chk}")
+  actualFailures=$(echo "${info}" | awk '{ print $4 }')
+  totalTests=$(echo "${info}" | awk ' {print $2 }')
+  expectedFailures=2
+
+  echo "actualFailures:${actualFailures}"
+  echo "totalTests:${totalTests}"
+  echo "expectedFailures:${expectedFailures}"
 }
+
 
 zopen_append_to_env()
 {
-  # echo envars outside of PATH, MANPATH, LIBPATH
+cat <<ZZ
+if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
+  export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
+  export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS} -lxml2"
+fi
+ZZ
 }
