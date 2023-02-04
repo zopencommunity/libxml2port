@@ -2,12 +2,23 @@ export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
 export ZOPEN_TARBALL_DEPS="libiconv"
 export ZOPEN_TYPE="TARBALL"
 
+export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
+
+#
+# Starter for Python
+# (probably not commonmark but keep it here so I remember syntax to pull in package)
+# 
+	if ! type python3 >/dev/null ; then  # || ! ( pip3 freeze | grep -q commonmark ); then
+		echo "need python3 with commonmark package set up for build of rsync" >&2
+		return 4
+	fi
+	export PATH=${HOME}/.local/bin:$PATH
+
+
 zopen_check_results()
 {
 # Look for line starting with Total. Should be no more than 2 errors
 # Total 2737 tests, 2 errors, 0 leaks
-grep '^Total' log/20230123_005029_check.log
-Total 2737 tests, 2 errors, 0 leaks
   dir="$1"
   pfx="$2"
   chk="$1/$2_check.log"
@@ -39,4 +50,8 @@ if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
   export LIBXML_LIBS="-lxml2"
 fi
 ZZ
+}
+
+zopen_get_version() {
+  ./xml2-config --version
 }
