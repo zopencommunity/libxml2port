@@ -2,9 +2,10 @@ export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
 export ZOPEN_TARBALL_DEPS="libiconv bash"
 export ZOPEN_TYPE="TARBALL"
 
-export CONFIG_SHELL="$BASH_HOME/bin/bash"
-export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
+# msf - unfortunate hack for now since BASH_HOME isn't defined when this code is source'd
+export CONFIG_SHELL="$HOME/zopen/prod/bash/bin/bash"
 
+export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
 #
 # Starter for Python
 # (probably not commonmark but keep it here so I remember syntax to pull in package)
