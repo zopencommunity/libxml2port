@@ -1,7 +1,8 @@
 export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
-export ZOPEN_TARBALL_DEPS="libiconv"
+export ZOPEN_TARBALL_DEPS="libiconv bash"
 export ZOPEN_TYPE="TARBALL"
 
+export CONFIG_SHELL="$BASH_HOME/bin/bash"
 export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
 
 #
