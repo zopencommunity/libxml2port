@@ -3,7 +3,7 @@ export ZOPEN_TARBALL_DEPS="make sed diffutils coreutils findutils libiconv bash"
 export ZOPEN_TYPE="TARBALL"
 
 # msf - unfortunate hack for now since BASH_HOME isn't defined when this code is source'd
-export CONFIG_SHELL="$HOME/zopen/prod/bash/bin/bash"
+#export CONFIG_SHELL="$HOME/zopen/prod/bash/bin/bash"
 
 export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
 #
