@@ -1,5 +1,5 @@
 export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
-export ZOPEN_TARBALL_DEPS="make sed diffutils coreutils findutils libiconv bash"
+export ZOPEN_TARBALL_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib"
 export ZOPEN_TYPE="TARBALL"
 
 # msf - unfortunate hack for now since BASH_HOME isn't defined when this code is source'd
