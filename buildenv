@@ -7,7 +7,7 @@ export ZOPEN_TYPE="TARBALL"
 
 export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
 
-# Requires commonmark
+# Requires python3
 zopen_init()
 {
   if ! type python3 >/dev/null ; then
