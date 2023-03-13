@@ -10,9 +10,12 @@ export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
 # Starter for Python
 # (probably not commonmark but keep it here so I remember syntax to pull in package)
 # 
-	if ! type python3 >/dev/null ; then  # || ! ( pip3 freeze | grep -q commonmark ); then
+	if ! type python3 >/dev/null ; then  
 		echo "need python3 with commonmark package set up for build of rsync" >&2
 		return 4
+	fi
+	if ! ( pip3 freeze | grep -q commonmark ); then
+		pip3 install commonmark
 	fi
 	export PATH=${HOME}/.local/bin:$PATH
 
