@@ -5,7 +5,7 @@ export ZOPEN_TYPE="TARBALL"
 # msf - unfortunate hack for now since BASH_HOME isn't defined when this code is source'd
 #export CONFIG_SHELL="$HOME/zopen/prod/bash/bin/bash"
 
-export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
+export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
 
 # Requires python3
 zopen_init()
