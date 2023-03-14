@@ -5,17 +5,15 @@ export ZOPEN_TYPE="TARBALL"
 # msf - unfortunate hack for now since BASH_HOME isn't defined when this code is source'd
 #export CONFIG_SHELL="$HOME/zopen/prod/bash/bin/bash"
 
-export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=${HOME}/.local'
-#
-# Starter for Python
-# (probably not commonmark but keep it here so I remember syntax to pull in package)
-# 
-	if ! type python3 >/dev/null ; then  # || ! ( pip3 freeze | grep -q commonmark ); then
-		echo "need python3 with commonmark package set up for build of rsync" >&2
-		return 4
-	fi
-	export PATH=${HOME}/.local/bin:$PATH
+export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
 
+# Requires python3
+zopen_init()
+{
+  if ! type python3 >/dev/null ; then
+    printError "needs python3"
+  fi
+}
 
 zopen_check_results()
 {
