@@ -5,12 +5,15 @@ export ZOPEN_BUILD_LINE="STABLE"
 #export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
 
 # Requires python3
-#zopen_init()
-#{
-#  if ! type python3 >/dev/null ; then
-#    printError "needs python3"
-#  fi
-#}
+zopen_init()
+{
+  python3 -m venv xml2_python
+  . ./xml2_python/bin/activate
+}
+zopen_term()
+{
+  deactivate
+}
 
 zopen_check_results()
 {
