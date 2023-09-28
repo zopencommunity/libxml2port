@@ -10,7 +10,7 @@ zopen_init()
   python3 -m venv xml2_python
   . ./xml2_python/bin/activate
 }
-zopen_term()
+zopen_terminate()
 {
   deactivate
 }
