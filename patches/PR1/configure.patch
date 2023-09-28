@@ -1,0 +1,12 @@
+diff --git a/configure b/configure
+index aa433ea..5c16d4e 100755
+--- a/configure
++++ b/configure
+@@ -4881,6 +4881,7 @@ ltmain=$ac_aux_dir/ltmain.sh
+ # Backslashify metacharacters that are still active within
+ # double-quoted strings.
+ sed_quote_subst='s/\(["`$\\]\)/\\\1/g'
++lt_cv_deplibs_check_method=pass_all
+ 
+ # Same as above, but do not quote variable references.
+ double_quote_subst='s/\(["`\\]\)/\\\1/g'

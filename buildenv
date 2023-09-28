@@ -1,18 +1,18 @@
-export ZOPEN_TARBALL_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
-export ZOPEN_TARBALL_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib"
-export ZOPEN_TYPE="TARBALL"
+export ZOPEN_STABLE_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
+export ZOPEN_STABLE_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib python"
+export ZOPEN_BUILD_LINE="STABLE"
 
-# msf - unfortunate hack for now since BASH_HOME isn't defined when this code is source'd
-#export CONFIG_SHELL="$HOME/zopen/prod/bash/bin/bash"
-
-export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
+#export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
 
 # Requires python3
 zopen_init()
 {
-  if ! type python3 >/dev/null ; then
-    printError "needs python3"
-  fi
+  python3 -m venv xml2_python
+  . ./xml2_python/bin/activate
+}
+zopen_terminate()
+{
+  deactivate
 }
 
 zopen_check_results()
