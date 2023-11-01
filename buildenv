@@ -1,6 +1,9 @@
-export ZOPEN_STABLE_URL="http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz"
-export ZOPEN_STABLE_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib python"
+# bump: libxml2-version /LIBXML2_VERSION="(.*)"/ http://xmlsoft.org/sources/|re:/libxml2-([\d.]+).tar.gz/$1/|semver:*
+LIBXML2_VERSION="2.9.12"
+
 export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_STABLE_URL="http://xmlsoft.org/sources/libxml2-${LIBXML2_VERSION}.tar.gz"
+export ZOPEN_STABLE_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib python"
 
 #export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
 
@@ -32,7 +35,6 @@ zopen_check_results()
   echo "totalTests:${totalTests}"
   echo "expectedFailures:${expectedFailures}"
 }
-
 
 zopen_append_to_env()
 {
