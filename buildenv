@@ -2,6 +2,7 @@
 LIBXML2_VERSION="2.9.12"
 
 export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_CATEGORIES="library"
 export ZOPEN_STABLE_URL="http://xmlsoft.org/sources/libxml2-${LIBXML2_VERSION}.tar.gz"
 export ZOPEN_STABLE_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib python"
 
