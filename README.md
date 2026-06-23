@@ -1,3 +1,5 @@
+[![CodeQL](https://github.com/zopencommunity/libxml2port/actions/workflows/codeql.yml/badge.svg)](https://github.com/zopencommunity/libxml2port/actions/workflows/codeql.yml)
+
 [![Automatic version updates](https://github.com/ZOSOpenTools/libxml2port/actions/workflows/bump.yml/badge.svg)](https://github.com/ZOSOpenTools/libxml2port/actions/workflows/bump.yml)
 
 # Libxml2
