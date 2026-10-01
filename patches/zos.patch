@@ -1,0 +1,25 @@
+diff --git a/configure b/configure
+index 08b36b6..a7f8626 100755
+--- a/configure
++++ b/configure
+@@ -5323,6 +5323,7 @@ ltmain=$ac_aux_dir/ltmain.sh
+ # Backslashify metacharacters that are still active within
+ # double-quoted strings.
+ sed_quote_subst='s/\(["`$\\]\)/\\\1/g'
++lt_cv_deplibs_check_method=pass_all
+ 
+ # Same as above, but do not quote variable references.
+ double_quote_subst='s/\(["`\\]\)/\\\1/g'
+diff --git a/runtest.c b/runtest.c
+index 113e161..8b304f8 100644
+--- a/runtest.c
++++ b/runtest.c
+@@ -4991,7 +4991,7 @@ testThread(void)
+         nb_tests++;
+ 
+         for (i = 0; i < num_threads; i++) {
+-            tid[i] = (pthread_t) - 1;
++            tid[i].__ = -1;
+         }
+ 
+         for (i = 0; i < num_threads; i++) {

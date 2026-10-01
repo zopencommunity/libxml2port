@@ -1,11 +1,11 @@
-# bump: libxml2-version /LIBXML2_VERSION="(.*)"/ http://xmlsoft.org/sources/|re:/libxml2-([\d.]+).tar.gz/$1/|semver:*
-LIBXML2_VERSION="2.9.12"
+# bump: libxml2-version /LIBXML2_VERSION="(.*)"/ https://download.gnome.org/sources/libxml2/cache.json|re:/"([\d]+\.[\d]+\.[\d]+)":\s*\{[^}]*"tar\.xz"/$1/|semver:*
+LIBXML2_VERSION="2.15.4"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="library"
-export ZOPEN_STABLE_URL="http://xmlsoft.org/sources/libxml2-${LIBXML2_VERSION}.tar.gz"
-export ZOPEN_STABLE_DEPS="make sed diffutils coreutils findutils libiconv bash zoslib check_python"
-
+export ZOPEN_STABLE_URL="https://download.gnome.org/sources/libxml2/$(echo ${LIBXML2_VERSION} | cut -d. -f1,2)/libxml2-${LIBXML2_VERSION}.tar.xz"
+export ZOPEN_STABLE_DEPS="make sed diffutils coreutils findutils libiconv bash check_python pkgconfig gawk"
+export ZOPEN_EXTRA_CONFIGURE_OPTS="--without-modules"
 #export ZOPEN_EXTRA_CONFIGURE_OPTS='--with-python=yes --with-python-install-dir=$ZOPEN_INSTALL_DIR/site-packages'
 
 # Requires python3
@@ -21,16 +21,21 @@ zopen_terminate()
 
 zopen_check_results()
 {
-# Look for line starting with Total. Should be no more than 2 errors
-# Total 2737 tests, 2 errors, 0 leaks
   dir="$1"
   pfx="$2"
   chk="$1/$2_check.log"
 
-  info=$(grep '^Total' "${chk}")
-  actualFailures=$(echo "${info}" | awk '{ print $4 }')
-  totalTests=$(echo "${info}" | awk ' {print $2 }')
-  expectedFailures=2
+  eval $(awk '/^Total [0-9]+ tests/ {
+    tests += $2
+    if ($4 ~ /^[0-9]+$/) {
+      failures += $4
+    }
+  }
+  END {
+    printf("totalTests=%d\nactualFailures=%d\n", tests, failures)
+  }' "${chk}")
+
+  expectedFailures=0
 
   echo "actualFailures:${actualFailures}"
   echo "totalTests:${totalTests}"
